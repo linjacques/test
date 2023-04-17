@@ -1,5 +1,8 @@
 <?php 
-
+if (isset($_POST["envoyer"])) {
+    extract($_POST);
+    $id = mysqli_connect();
+}
 ?>
 
 <!DOCTYPE html>
