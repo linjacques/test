@@ -2,6 +2,7 @@
 if (isset($_POST["envoyer"])) {
     extract($_POST);
     $id = mysqli_connect();
+    $req="select * from";
 }
 ?>
 
