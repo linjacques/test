@@ -1,25 +1,25 @@
-name: Run Pytest in Docker 
+name: CI - Run Pytest in Docker
 
 on:
   push:
     branches:
-      - feature_branch  
+      - feature_branch  # Exécute uniquement sur feature_branch
   pull_request:
     branches:
-      - main  
+      - main  # Vérifie les tests lors d'une PR vers main
 
 jobs:
   tests:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4  # Récupère le code source
 
-      - name: Run tests inside Docker
+      - name: Build Docker image
         run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:/app \
-            -w /app \
-            python:3.9 \
-            bash -c "pip install pytest && pytest"
+          docker build -t my-python-tests .
+
+      - name: Run tests inside container
+        run: |
+          docker run --rm my-python-tests
