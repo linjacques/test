@@ -9,3 +9,6 @@ def fizzbuzz(n):
         return "Buzz"
     else:
         return n
+
+
+print(fizzbuzz(35)) 
