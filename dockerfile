@@ -2,9 +2,9 @@ FROM python:3.9
 
 WORKDIR /app
 
-COPY .github /app/
-COPY .idea /app/
-COPY ./tests /app/
+COPY .github /app/.github
+COPY .idea /app/.idea
+COPY ./tests /app/tests
 COPY .gitignore /app/
 COPY dockerfile /app/
 COPY fizzbuzz.py /app/
@@ -13,4 +13,4 @@ COPY requirements.txt /app/
 
 RUN pip install -r requirements.txt
 
-CMD ["python3", "fizzbuzz.py"]
+CMD ["pytest", "tests/fizzbuzzTest.py"]
