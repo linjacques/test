@@ -1,15 +1,25 @@
-name: Python Tests
+name: Run Pytest in Docker 
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - feature_branch  
+  pull_request:
+    branches:
+      - main  
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-      - run: pip install pytest
-      - run: python3 -m pytest tests/fizzbuzzTest.py
+      - name: Checkout repository
+        uses: actions/checkout@v4  # Récupère le code source
+
+      - name: Run tests inside Docker
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            -w /app \
+            python:3.9 \
+            bash -c "pip install pytest && pytest"
