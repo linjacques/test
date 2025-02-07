@@ -1,15 +1,25 @@
-name: Python Tests
+name: CI - Run Pytest in Docker
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - feature_branch  # Exécute uniquement sur feature_branch
+  pull_request:
+    branches:
+      - main  # Vérifie les tests lors d'une PR vers main
 
 jobs:
   tests:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-      - run: pip install pytest
-      - run: python3 -m pytest tests/fizzbuzzTest.py
+      - name: Checkout repository
+        uses: actions/checkout@v4  # Récupère le code source
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-python-tests .
+
+      - name: Run tests inside container
+        run: |
+          docker run --rm my-python-tests
