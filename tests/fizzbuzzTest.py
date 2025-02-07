@@ -1,5 +1,3 @@
-import pytest
-from fizzbuzz import fizzbuzz
 
 def test_est_divisible_par_3():
     assert fizzbuzz(3) == "Fizz"
