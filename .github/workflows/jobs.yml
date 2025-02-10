@@ -3,10 +3,10 @@ name: CI - Run Pytest in Docker
 on:
   push:
     branches:
-      - feature_branch  # Exécute uniquement sur feature_branch
+      - feature_branch  
   pull_request:
     branches:
-      - main  # Vérifie les tests lors d'une PR vers main
+      - main  
 
 jobs:
   tests:
@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Récupère le code source
+        uses: actions/checkout@v4  
 
       - name: Build Docker image
         run: |
